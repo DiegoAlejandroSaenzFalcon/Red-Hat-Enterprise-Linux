@@ -36,6 +36,7 @@ solo para la prueba; **no dejan demonios persistentes**: `oscap` corre bajo dema
 | **CIS RHEL 10 — Server L1 (línea base, antes)** | 293 | 173 | 120 | 59% cumplimiento |
 | **CIS RHEL 10 — Server L1 (después de endurecer)** | 293 | 185 | 108 | 63% (+12) |
 | **DISA STIG RHEL 10 (línea base)** | 465 | 176 | 280 | 9 sin comprobar |
+| **DISA STIG RHEL 10 (después de endurecer)** | 465 | 190 | 266 | 9 sin comprobar |
 
 Los reportes HTML completos (por regla, con CCE y remediación sugerida) están en
 esta carpeta: `rhel10-cis-l1-report.html`, `rhel10-cis-l1-after-report.html`,
