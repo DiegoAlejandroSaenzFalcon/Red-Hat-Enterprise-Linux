@@ -132,3 +132,28 @@ Si los tres comandos confirman lo anterior, la WiFi está operativa.
 ---
 
 *Autor: Diego Alejandro Saenz Falcon* · https://github.com/DiegoAlejandroSaenzFalcon
+
+---
+
+## 6. Nota de integridad (importante)
+
+Los binarios `wpa_supplicant` y `libnm-device-plugin-wifi.so` se copiaron a mano
+desde el ISO porque en este entorno **no se instaló nada vía `dnf`** (restricción
+del propietario). Consecuencia: **no están gestionados por RPM** (no aparecen en
+`rpm -V`, no se actualizan con `dnf update`). Es un **hueco de integridad**
+conocido y documentado.
+
+En un entorno gestionado (con acceso a repositorios) lo correcto es reemplazarlos
+por paquetes firmados:
+
+```bash
+sudo dnf install -y wpa_supplicant NetworkManager-wifi
+sudo reboot
+```
+
+Esto cierra el hueco y deja la WiFi bajo gestión oficial de RHEL. La recuperación
+offline de esta guía sigue siendo válida como solución de contingencia.
+
+---
+
+*Autor: Diego Alejandro Saenz Falcon* · https://github.com/DiegoAlejandroSaenzFalcon

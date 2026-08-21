@@ -26,7 +26,14 @@
 
 | Guía | Problema resuelto | Enlace |
 |------|-------------------|--------|
-| **WiFi en RHEL 10.2 sin internet** | La tarjeta WiFi aparecía como *"sin gestión"*; se recuperan `wpa_supplicant` y el plugin de NetworkManager desde el ISO de instalación | [Ver guía](./guia-wifi-rhel10/README.md) |
+| **WiFi en RHEL 10.2 sin internet** | La tarjeta WiFi aparecía como *"sin gestión"*; se recuperan `wpa_supplicant` y el plugin de NetworkManager desde el ISO de instalación (offline) | [Ver guía](./guia-wifi-rhel10/README.md) |
+| **Optimización de rendimiento en RHEL 10.2** | Ajustes de red (BBR + DNS rápido), memoria (swappiness), WiFi (powersave off) y Bluetooth off, sin instalar nada | [Ver guía](./guia-rendimiento/README.md) |
+| **Auditoría y endurecimiento de seguridad en RHEL 10.2** | Reporte profesional alineado a la *Enciclopedia de la Seguridad Informática* + auditoría OpenSCAP **CIS** y **DISA STIG** real, con before/after y método de reactivación SSH seguro | [Ver guía](./guia-seguridad/README.md) |
+
+### Evidencia de la auditoría (en `guia-seguridad/`)
+- `rhel10-cis-l1-report.html` — CIS RHEL 10 Server L1 (línea base)
+- `rhel10-cis-l1-after-report.html` — CIS RHEL 10 Server L1 (tras endurecer)
+- `rhel10-stig-report.html` — DISA STIG RHEL 10 (línea base)
 
 ---
 
