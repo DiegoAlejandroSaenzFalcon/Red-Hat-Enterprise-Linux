@@ -34,9 +34,9 @@ solo para la prueba; **no dejan demonios persistentes**: `oscap` corre bajo dema
 | Baseline | Evaluados | Pass | Fail | Nota |
 |----------|-----------|------|------|------|
 | **CIS RHEL 10 — Server L1 (línea base, antes)** | 293 | 173 | 120 | 59% cumplimiento |
-| **CIS RHEL 10 — Server L1 (después de endurecer)** | 293 | 185 | 108 | 63% (+12) |
+| **CIS RHEL 10 — Server L1 (Fase 2 final)** | 296 | 207 | 89 | 70% |
 | **DISA STIG RHEL 10 (línea base)** | 465 | 176 | 280 | 9 sin comprobar |
-| **DISA STIG RHEL 10 (después de endurecer)** | 465 | 190 | 266 | 9 sin comprobar |
+| **DISA STIG RHEL 10 (Fase 2 final)** | 460 | 215 | 245 | 9 sin comprobar |
 
 Los reportes HTML completos (por regla, con CCE y remediación sugerida) están en
 esta carpeta: `rhel10-cis-l1-report.html`, `rhel10-cis-l1-after-report.html`,
@@ -211,3 +211,34 @@ sudo oscap xccdf eval --profile ... --report rep.html "$DS"
 ---
 
 *Autor: Diego Alejandro Saenz Falcon* · https://github.com/DiegoAlejandroSaenzFalcon
+
+## 10. Fase 2 — Endurecimiento adicional (Opción A + B)
+
+Tras la primera pasada, se aplicó una segunda capa siguiendo CIS/STIG y la
+enciclopedia (Bloques 2/3/5/7):
+
+**Sin instalar (2-A):**
+- Drop-in `/etc/ssh/sshd_config.d/99-hardening.conf` (root off, pubkey, MaxAuthTries 3, AllowUsers).
+- `pam_pwquality` (mín 14, complejidad, `enforce_for_root`).
+- `/tmp` como tmpfs `nosuid,nodev,noexec`; `/dev/shm` con `noexec`.
+- Contraseña de GRUB (`/boot/grub2/user.cfg`).
+- Banner legal (`/etc/issue`, `/etc/motd`).
+- `ctrl-alt-del` enmascarado; core dumps restringidos (`* hard core 0`, `fs.suid_dumpable=0`).
+- Módulos poco usados deshabilitados (cramfs, hfs, squashfs, usb-storage, dccp, sctp…).
+- Reglas de `auditd` STIG (34 reglas, inmutables).
+- `tuned` perfil `throughput-performance`; sysctl extra (somaxconn, syn_backlog, dirty_*, numa_balancing=0); `noatime` en fstab; `kdump` desactivado.
+
+**Instalado (2-B — lo que usan profesionales):**
+- `wpa_supplicant` + `NetworkManager-wifi` **por RPM** (cierra el hueco de integridad del WiFi).
+- `dnf update --security` (sistema al día; sin pendientes).
+- **AIDE**: BD de integridad inicializada + `aidecheck.timer` diario.
+- **usbguard**: política generada desde los dispositivos actuales; nuevos USB bloqueados.
+- **fapolicyd**: allowlisting de ejecutables en modo **enforce** (binarios RPM permitidos).
+
+**Nota crypto-policies:** se probó `FUTURE` pero rompió `dnf` (el certificado del CDN de Red Hat se considera "key too weak"); se volvió a `DEFAULT` (política fuerte y parcheable). Lección: la disponibilidad de parches pesa más.
+
+### Resultado final OpenSCAP (Fase 2)
+| Baseline | Pass | Fail |
+|----------|------|------|
+| CIS RHEL 10 Server L1 | 207 | 89 |
+| DISA STIG RHEL 10 | 215 | 245 |
