@@ -131,6 +131,24 @@ oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
 
 Resultado obtenido con este procedimiento: **194 pass / 102 fail** (CIS RHEL 10 Server L1).
 
+### Resultado final tras endurecimiento CIS adicional (sin lockout)
+
+Aplicando las remediaciones CIS restantes **de forma selectiva y verificada** (excluyendo
+solo lo que riesgo bloqueo), el score subió a **291 pass / 6 fail** (CIS RHEL 10 Server L1).
+
+Las 6 reglas que quedan sin aplicar son **exclusiones deliberadas por seguridad de acceso**,
+no fallos:
+- `configure_custom_crypto_policy_cis` → se deja `DEFAULT` (la guía probó `FUTURE` y rompió `dnf`).
+- `grub2_password` → omitido (solo afecta si se reinicia; nunca reiniciamos).
+- `accounts_password_set_max_life_existing`, `accounts_password_last_change_is_in_past`,
+  `account_disable_post_pw_expiration` → se excluye **root** del aging para que nunca se bloquee.
+- `service_systemd-journal-upload_enabled` → opcional (requiere colector remoto).
+
+Todo lo demás (sysctl, módulos kernel, permisos, journald, mount options, sudo, pam,
+sshd endurecido con `AllowUsers DevFS`, firewalld) está aplicado y verificado. El agente
+(opencode/gh) sigue ejecutando bajo `fapolicyd` enforce gracias al trust + watchdog + timer
+de re-afirmación.
+
 ## 7. Reversibilidad
 
 Cada cambio es aislado:
