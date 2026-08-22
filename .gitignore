@@ -31,6 +31,11 @@ config.secret.*
 *.apikey
 apikeys.txt
 api_keys.txt
+# Defensa en profundidad: tokens locales fuera del repo (ej. ~/.github_token)
+.github_token
+github_token
+hosts.yml
+config/gh/
 
 # Logs
 *.log

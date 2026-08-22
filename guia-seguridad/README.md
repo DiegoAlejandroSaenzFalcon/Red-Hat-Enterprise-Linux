@@ -242,3 +242,14 @@ enciclopedia (Bloques 2/3/5/7):
 |----------|------|------|
 | CIS RHEL 10 Server L1 | 207 | 89 |
 | DISA STIG RHEL 10 | 215 | 245 |
+
+---
+
+## Guía complementaria: anti-lockout (fapolicyd sin bloqueo)
+
+Si vas a aplicar el endurecimiento en una instancia que administras a distancia,
+lee primero **[Endurecer con fapolicyd SIN bloquear el acceso](./endurecimiento-seguro-fapolicyd.md)**.
+Documenta la causa de los bloqueos repetidos (fapolicyd enforce sobre binarios no-RPM,
+`even_deny_root`, SSH apagado) y el protocolo seguro: red de rescate, `watchdog`,
+`dead-man switch` y `fapolicyd` en *permissive* antes de *enforce*. Aplica la regla
+de oro: **disponibilidad primero, todo reversible**.
