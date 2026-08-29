@@ -101,6 +101,50 @@ systemctl restart fapolicyd
 > Si en enforce el agente se niega, el **watchdog** (Paso 0.3) lo desactiva solo.
 > Nunca te quedas sin poder ejecutar.
 
+### 4.1 Timer de re-afirmación automática (anti-lockout tras actualizar el agente)
+
+`fapolicyd` confía por **hash de integridad**: si atualizas `opencode`/`gh` y cambia
+su hash, el agente vuelve a quedar fuera aunque esté en el trust DB. Solución: un
+**timer** que re-añade los binarios periódicamente y, si detecta bloqueo, baja
+`fapolicyd` a `permissive` solo.
+
+```bash
+# /usr/local/sbin/opencode-fapolicy-reaffirm.sh
+#!/bin/bash
+BINS=("/home/DevFS/.opencode/bin/opencode" "/usr/bin/gh")
+LOG=/var/log/opencode-fapolicy-reaffirm.log
+echo "=== $(date) ===" >> "$LOG"
+systemctl is-active --quiet fapolicyd || { systemctl start fapolicyd; echo "iniciado" >>"$LOG"; }
+for b in "${BINS[@]}"; do
+  [ -x "$b" ] || { echo "AVISO ausente: $b" >>"$LOG"; continue; }
+  fapolicyd-cli --file update "$b" >>"$LOG" 2>&1 || true
+  fapolicyd-cli --file add  "$b" >>"$LOG" 2>&1 || true
+  echo "reafirmado: $b" >>"$LOG"
+done
+for b in "${BINS[@]}"; do
+  [ -x "$b" ] && ! timeout 5 "$b" --version >/dev/null 2>&1 && {
+    systemctl stop fapolicyd
+    sed -i 's/^permissive = .*/permissive = 1/' /etc/fapolicyd/fapolicyd.conf
+    systemctl start fapolicyd
+    echo "URGENTE: fapolicyd a permissive por bloqueo de $b" >>"$LOG"; }
+done
+
+# service + timer
+# /etc/systemd/system/opencode-fapolicy-reaffirm.service
+#   [Unit] Description=Re-afirma confianza opencode/gh (anti-lockout)
+#   After=fapolicyd.service
+#   [Service] Type=oneshot
+#   ExecStart=/usr/local/sbin/opencode-fapolicy-reaffirm.sh
+# /etc/systemd/system/opencode-fapolicy-reaffirm.timer
+#   [Unit] Description=Timer re-afirmacion
+#   [Timer] OnBootSec=2min  OnUnitActiveSec=30min
+#   [Install] WantedBy=timers.target
+# systemctl daemon-reload && systemctl enable --now opencode-fapolicy-reaffirm.timer
+```
+
+Este timer reemplaza al watchdog manual y hace el anti-lockout **reactivo**: si el
+agente dejó de ejecutarse, baja solo a permissive sin intervención humana.
+
 ## 5. Paso 2 — `pam_faillock` con `even_deny_root` pero seguro
 
 ```bash
@@ -149,6 +193,32 @@ sshd endurecido con `AllowUsers DevFS`, firewalld) está aplicado y verificado. 
 (opencode/gh) sigue ejecutando bajo `fapolicyd` enforce gracias al trust + watchdog + timer
 de re-afirmación.
 
+### 6.1 Hallazgos de auditoría adicionales (29/08/2026)
+
+Dos detalles que cualquier endurecimiento bien intencionado puede dejar pasados por
+alto y conviene verificar tras aplicar SSH hardening:
+
+1. **Regla contradictoria de Anaconda en `PermitRootLogin`.** El instalador genera
+   `/etc/ssh/sshd_config.d/01-permitrootlogin.conf` con `PermitRootLogin yes`. Como
+   `sshd` respeta la **primera** ocurrencia de una directiva (no la última, al revés
+   de systemd), ese `yes` **gana** sobre cualquier `no` que pongas en `99-*.conf`
+   aunque se lea después. Resultado: root sí entra por SSH. Fix:
+   ```bash
+   sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config.d/01-permitrootlogin.conf
+   sudo sshd -t && sudo systemctl reload sshd
+   sudo sshd -T | grep -i permitrootlogin   # debe decir "no"
+   ```
+   Siempre comprueba la config **efectiva** con `sshd -T`, no lo que crees que pusiste.
+
+2. **`fwupd-refresh` alarga el arranque ~20s.** El timer `fwupd-refresh.timer` busca
+   actualizaciones de firmware en cada boot y es, con diferencia, lo que más ralentiza
+   el arranque en `systemd-analyze blame`. En una estación de desarrollo no es crítico:
+   ```bash
+   sudo systemctl disable --now fwupd-refresh.timer   # reversible
+   systemctl is-enabled fwupd-refresh.timer            # debe decir "disabled"
+   ```
+   No rompe el firmware ya cargado; solo evita la comprobación de novedades al encender.
+
 ## 7. Reversibilidad
 
 Cada cambio es aislado:
@@ -156,6 +226,8 @@ Cada cambio es aislado:
 - sudo: `/etc/sudoers.d/devfs` (eliminar revierte).
 - faillock: perfil `authselect` (`authselect disable-feature with-faillock`).
 - fapolicyd/usbguard: `systemctl disable --now` + restauración del backup de `/etc`.
+- timer re-afirmación: `systemctl disable --now opencode-fapolicy-reaffirm.timer` y
+  borrar `/usr/local/sbin/opencode-fapolicy-reaffirm.sh`.
 
 ## 8. CERO SECRETOS
 
