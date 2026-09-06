@@ -1,11 +1,11 @@
-﻿site_name: Red Hat Enterprise Linux — Base de Conocimiento Didáctica
-site_url: https://diegoalejandrosaenzfalcon.github.io/Red-Hat-Enterprise-Linux/
-site_description: Guías paso a paso para RHEL 10.2: WiFi, rendimiento, seguridad
-site_author: Diego Alejandro Saenz Falcon
-copyright: Copyright &copy; 2024 Diego Alejandro Saenz Falcon
+﻿site_name: "Red Hat Enterprise Linux - Base de Conocimiento Didactica"
+site_url: "https://diegoalejandrosaenzfalcon.github.io/Red-Hat-Enterprise-Linux/"
+site_description: "Guias paso a paso para RHEL 10.2: WiFi, rendimiento, seguridad"
+site_author: "Diego Alejandro Saenz Falcon"
+copyright: "Copyright &copy; 2024 Diego Alejandro Saenz Falcon"
 
-repo_url: https://github.com/DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux
-repo_name: DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux
+repo_url: "https://github.com/DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux"
+repo_name: "DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux"
 
 theme:
   name: material
@@ -39,7 +39,7 @@ markdown_extensions:
 
 nav:
   - Inicio: index.md
-  - Guías:
+  - Guias:
     - WiFi Offline: guia-wifi-rhel10/README.md
     - Rendimiento: guia-rendimiento/README.md
     - Seguridad (CIS/STIG): guia-seguridad/README.md
