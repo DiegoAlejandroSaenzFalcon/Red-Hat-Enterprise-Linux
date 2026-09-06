@@ -26,12 +26,12 @@ jobs:
         run: pip install mkdocs mkdocs-material
       - name: Build docs
         run: mkdocs build --strict --verbose 2>&1 | tee build.log
-      - name: Debug - show site structure
+      - name: Debug - verify site
         run: |
-          echo "=== site dir ==="
-          ls -la site/
-          echo "=== site/index.html ==="
-          head -5 site/index.html
+          pwd
+          ls -la
+          echo "---"
+          if [ -d "site" ]; then echo "site EXISTS"; ls -la site/; else echo "site NOT FOUND"; fi
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
