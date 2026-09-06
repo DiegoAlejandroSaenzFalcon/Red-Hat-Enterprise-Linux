@@ -51,5 +51,3 @@ extra:
 
 plugins:
   - search
-  - minify:
-      minify_html: true
