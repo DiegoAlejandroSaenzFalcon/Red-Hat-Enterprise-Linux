@@ -1,6 +1,12 @@
 # Red Hat Enterprise Linux — Base de Conocimiento Didáctica
 
-### Diego Alejandro Saenz Falcon · RHEL 10 · Linux Empresarial · Administración de Sistemas · Ciberseguridad
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](https://opensource.org/licenses/GPL-3.0)
+[![RHEL](https://img.shields.io/badge/RHEL-10.2-red.svg)](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)]
+[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-brightgreen.svg)](https://diegoalejandrosaenzfalcon.github.io/Red-Hat-Enterprise-Linux/)
+[![Autor](https://img.shields.io/badge/Autor-Diego%20Alejandro%20Saenz%20Falcon-blue.svg)](https://github.com/DiegoAlejandroSaenzFalcon)
+
+### Diego Alejandro Saenz Falcon · RHEL 10 · Linux Empresarial · Administración de Sistemas · Ciberseguridad Saenz Falcon · RHEL 10 · Linux Empresarial · Administración de Sistemas · Ciberseguridad
 
 > Repositorio educativo, gratuito y didáctico sobre **Red Hat Enterprise Linux 10 (RHEL 10.2)**.
 > Cada guía está escrita paso a paso, pensada para quienes recién empiezan con Linux
