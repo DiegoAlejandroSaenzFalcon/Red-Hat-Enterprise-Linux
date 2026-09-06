@@ -26,6 +26,12 @@ jobs:
         run: pip install mkdocs mkdocs-material
       - name: Build docs
         run: mkdocs build --strict --verbose 2>&1 | tee build.log
+      - name: Debug - show site structure
+        run: |
+          echo "=== site dir ==="
+          ls -la site/
+          echo "=== site/index.html ==="
+          head -5 site/index.html
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
