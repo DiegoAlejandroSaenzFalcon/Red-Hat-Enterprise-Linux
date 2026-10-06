@@ -1,0 +1,24 @@
+# Observed results — SOLUCIONATIA-001
+
+This file records observed results available from the intervention. It intentionally does not fabricate complete terminal transcripts that were not preserved verbatim.
+
+- lspci: Intel corporate Alder Lake-N PCH CNVi WiFi device, ID 0274; kernel driver in use: iwlwifi; module: iwlwifi.
+- dmesg read as unprivileged user was denied by kernel restriction; no unsupported conclusion was drawn from that command.
+- rpm -q wpa_supplicant NetworkManager-wifi: both packages were absent before remediation.
+- dnf repolist: BaseOS and AppStream were configured.
+- Initial Internet path: unavailable.
+- USB tethering: provided working network connectivity and DNS.
+- /dev/sda: RHEL installation USB, approximately 14.6 GiB.
+- USB media: ISO9660 content plus EFI/FAT area.
+- ISO root mounted read-only: Boot, EFI, images.
+- /mnt/rheliso/images/install.img: present.
+- /mnt/installimg/usr/sbin/wpa_supplicant: present.
+- libnm-device-plugin-wifi.so: present inside install.img under a versioned NetworkManager directory.
+- Installed NetworkManager: 1.56.0-1.el10_2.x86_64.
+- install.img plugin path observed under: 1.56.0-1.el10.
+- Decision: do not use the manual file-copy recovery as the final remediation because of package/version integrity considerations.
+- sudo dnf install -y wpa_supplicant NetworkManager-wifi: completed successfully.
+- sudo systemctl restart NetworkManager: completed successfully.
+- nmcli device status after remediation: Wi-Fi reported operational; user confirmed all was OK.
+
+Final observed state: Wi-Fi connectivity recovered.
