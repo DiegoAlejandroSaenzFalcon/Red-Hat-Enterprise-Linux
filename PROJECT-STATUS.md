@@ -95,3 +95,26 @@ Primera línea base técnica del RHEL físico actual, obtenida directamente medi
 - Desktop Commander sigue en modo interactivo TTY2; la persistencia como servicio queda pendiente de diseño y autorización.
 
 **Evidencia:** [evidence/2026-10-06/RHEL-BASELINE-001/](./evidence/2026-10-06/RHEL-BASELINE-001/)
+
+
+## AICCP-ARCHITECTURE-v1 — Diseño del nodo operativo
+
+**Fecha:** 2026-10-06  
+**Estado:** SPECIFIED / DOCUMENTED
+
+La Fase 1 confirmó que RHEL será el nodo operativo gobernado para ChatGPT, Desktop Commander, OpenCode, auditoría y Git/GitHub.
+
+- RAM observada: ~7.2 GiB total / ~6.0 GiB disponible.
+- Swap: 7.6 GiB, sin uso.
+- Git: no instalado todavía.
+- GitHub CLI: no detectado.
+- OpenCode/AICCP: no activos.
+- Desktop Commander: activo exclusivamente en TTY2; TTY1 permanece libre.
+- Node.js 22.23.2 y Python 3.12.14 disponibles.
+- No se instalarán componentes pesados hasta superar los gates de diseño y medición.
+
+Diseño: `docs/AICCP-ARCHITECTURE-v1.md`.
+
+### Próximo gate autorizado
+
+Bootstrap mínimo: instalar Git, preparar workspace y validar repositorios antes de instalar OpenCode o crear el runtime AICCP. La configuración de proveedor/modelo de OpenCode se descubrirá después de la instalación y sin introducir API keys.
