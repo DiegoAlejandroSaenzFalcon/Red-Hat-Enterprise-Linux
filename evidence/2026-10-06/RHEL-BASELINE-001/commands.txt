@@ -1,0 +1,39 @@
+# Commands — RHEL-BASELINE-001
+
+## Read-only baseline
+
+hostnamectl --static
+cat /etc/os-release
+uname -a
+uptime
+free -h
+df -hT
+lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINTS
+systemctl --failed --no-pager
+systemctl get-default
+nmcli -t -f DEVICE,TYPE,STATE,CONNECTION device
+ss -lntup
+node --version
+npm --version
+python3 --version
+
+## Security / service inspection
+
+hostname
+getenforce
+sestatus
+systemctl is-enabled firewalld
+systemctl is-active firewalld
+firewall-cmd --get-active-zones
+firewall-cmd --get-default-zone
+systemctl is-enabled sshd
+systemctl is-active sshd
+timedatectl
+systemctl list-unit-files --state=enabled --no-pager
+dnf history list --reverse
+id
+groups
+
+## Desktop Commander process verification
+
+ps -o pid,ppid,user,tty,stat,etime,%cpu,%mem,args -p 12806,13085,13109
