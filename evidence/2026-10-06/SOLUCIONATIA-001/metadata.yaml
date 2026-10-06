@@ -1,0 +1,16 @@
+lab_id: SOLUCIONATIA-001
+date: 2026-10-06
+host: Lenovo RHEL 10.2 minimal/headless
+rhel_version: "10.2"
+kernel: "not captured verbatim during this incident"
+operator: "Diego Alejandro Saenz Falcon with ChatGPT assistance"
+objective: "Recover Intel Wi-Fi connectivity on RHEL 10.2"
+change_class: MEDIUM
+status: VERIFIED
+verification: "nmcli device status after DNF installation and NetworkManager restart showed Wi-Fi operational"
+rollback: "No storage/boot changes; package removal was not performed. NetworkManager restart is reversible."
+evidence_level: E4
+secret_handling: "No credentials or Wi-Fi passwords recorded"
+methods:
+  primary: "Official RPM installation via DNF using temporary USB tethering"
+  contingency: "RHEL installation USB and images/install.img offline recovery"
