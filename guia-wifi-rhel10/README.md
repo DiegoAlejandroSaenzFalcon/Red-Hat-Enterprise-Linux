@@ -1,3 +1,37 @@
+## Registro de caso real — SOLUCIONATIA-001 (2026-10-06)
+
+Esta guía fue contrastada durante una intervención real en RHEL 10.2. El caso confirmó el diagnóstico de soporte Wi-Fi ausente en NetworkManager: `wpa_supplicant` y `NetworkManager-wifi` no estaban instalados.
+
+### Resultado del caso
+
+La recuperación efectiva se realizó mediante el método recomendado cuando existe conectividad temporal:
+
+```bash
+sudo dnf install -y wpa_supplicant NetworkManager-wifi
+sudo systemctl restart NetworkManager
+nmcli device status
+```
+
+El teléfono conectado por USB proporcionó temporalmente la red necesaria para que DNF instalara los RPM oficiales. La interfaz `wlp0s20f3` quedó operativa.
+
+### Método offline contrastado
+
+También se verificó físicamente el medio RHEL 10.2:
+
+- USB identificado como `/dev/sda`, aproximadamente 14.6 GiB.
+- ISO montada en modo lectura.
+- `images/install.img` presente.
+- `wpa_supplicant` presente dentro de `install.img`.
+- `libnm-device-plugin-wifi.so` presente dentro de `install.img`.
+
+Durante el contraste se observó una diferencia de versión entre el NetworkManager instalado (`1.56.0-1.el10_2.x86_64`) y el directorio versionado del plugin encontrado en `install.img` (`1.56.0-1.el10`). Por integridad y gestión RPM, el método de copia manual no se utilizó como remediación final.
+
+**Conclusión:** el procedimiento offline queda como contingencia de emergencia; la instalación formal mediante DNF es el método preferido cuando puede obtenerse conectividad temporal.
+
+**Evidencia:** [evidence/2026-10-06/SOLUCIONATIA-001/](../evidence/2026-10-06/SOLUCIONATIA-001/)
+
+---
+
 # Guía: Conectar WiFi en RHEL 10.2 sin internet
 
 ### Diego Alejandro Saenz Falcon · Red Hat Enterprise Linux 10 (RHEL 10.2)
