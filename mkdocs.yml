@@ -46,6 +46,7 @@ nav:
   - Aprendizaje:
     - Ruta profesional: LEARNING-PATH.md
     - Matriz de laboratorio: LAB-MATRIX.md
+    - Referencia de comandos RHEL/Linux: docs/learning/rhel-linux-command-reference.md
   - IA:
     - Contrato IA: AI-CONTRACT.md
     - Seguridad IA: AI-SECURITY-CONTRACT.md
