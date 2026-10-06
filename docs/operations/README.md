@@ -1,5 +1,9 @@
 # Operations
 
+## Reference: command language
+
+The [RHEL/Linux Command Reference](../learning/rhel-linux-command-reference.md) is the canonical learning reference for basic and important commands, shell syntax, administration, diagnostics and high-risk operations.
+
 Required runbooks:
 
 - installation and recovery;
