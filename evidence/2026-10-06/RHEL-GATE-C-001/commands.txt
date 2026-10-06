@@ -1,0 +1,8 @@
+# RHEL-GATE-C-001
+git --version
+command -v git
+git config --global --get-regexp '^(user\.(name|email)|credential\..*|url\..*)$'
+mkdir -p /home/DevFS/workspaces
+git clone https://github.com/DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux.git /home/DevFS/workspaces/Red-Hat-Enterprise-Linux
+git -C /home/DevFS/workspaces/Red-Hat-Enterprise-Linux status --short --branch
+gh auth status
