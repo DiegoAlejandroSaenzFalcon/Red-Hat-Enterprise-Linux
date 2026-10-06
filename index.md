@@ -12,11 +12,17 @@ The objective is to demonstrate not only that RHEL can be installed, but that a 
 
 RHEL was selected deliberately because enterprise Linux administration is a real professional capability. The laboratory is therefore designed to reproduce the disciplines used in production environments while remaining safe and small enough for a laptop.
 
+## Command reference
+
+The laboratory now includes a structured [RHEL/Linux Command Reference](docs/learning/rhel-linux-command-reference.md) covering terminal navigation, users and permissions, files, text processing, Bash syntax, processes, hardware, DNF, systemd, journald, networking, security, SSH, storage, Git, Python, Podman, diagnostics and high-risk commands.
+
+The reference is designed to teach the language of the terminal rather than encourage blind copy/paste. Every command used in the laboratory should be understood, verified and documented.
+
 ## Current phase
 
-**USB preparation / installation pending.**
+**RHEL installed — interactive bootstrap and AI-environment preparation.**
 
-The first RHEL boot will create Baseline 0. No final system-state claims are published until that baseline exists.
+The first live baseline is being established from the running system. No final system-state claims are published until the baseline is verified.
 
 ## Architecture
 
