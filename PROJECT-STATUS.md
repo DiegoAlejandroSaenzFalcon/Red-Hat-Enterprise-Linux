@@ -20,9 +20,9 @@
 
 ## Physical environment
 
-RHEL installation media is currently being prepared on USB.
+RHEL 10.2 is installed and has been physically inspected. The current state is documented by RHEL-BASELINE-001.
 
-No claim is made about the final RHEL installation state until RHEL is booted and inspected.
+The repository must not claim local workspace state unless it is re-observed on the current machine.
 
 ## Next verification gate
 
@@ -46,7 +46,7 @@ The output becomes Baseline 0.
 
 ## State model
 
-USB_PREPARATION → BOOT_VERIFICATION → INSTALLATION → BASELINE_0 → SECURITY_BASELINE → LAB_BUILD → VERIFICATION → PORTFOLIO
+BOOT_VERIFICATION → BASELINE_0 → SECURITY_BASELINE → GIT_BOOTSTRAP → LAB_BUILD → VERIFICATION → PORTFOLIO
 
 Do not infer RHEL state from Windows. Do not repartition or overwrite the SSD without observed installer information and an explicit storage decision.
 
@@ -111,8 +111,8 @@ La Fase 1 confirmó que RHEL será el nodo operativo gobernado para ChatGPT, Des
 - OpenCode/AICCP: no activos.
 - Desktop Commander: activo exclusivamente en TTY2; TTY1 permanece libre.
 - Node.js 22.23.2 y Python 3.12.14 disponibles.
-- Workspace creado en `/home/DevFS/workspaces/`.
-- Repositorio `Red-Hat-Enterprise-Linux` clonado localmente en el workspace.
+- Previous workspace/clone claims were invalidated by the rollback audit and are no longer evidence of current state.
+- Current RHEL local repository/workspace state must be established by a fresh operator-run discovery before bootstrap continues.
 - No se instalarán componentes pesados hasta superar los gates de diseño y medición.
 
 Diseño: `docs/AICCP-ARCHITECTURE-v1.md`.
@@ -126,7 +126,7 @@ Diseño: `docs/AICCP-ARCHITECTURE-v1.md`.
 - Binario verificado: `/usr/bin/git`.
 - No se configuraron credenciales Git globales.
 - `gh` aún no está instalado.
-- Workspace RHEL creado y repositorio canónico clonado.
+- Previous workspace/clone state was rolled back. A new workspace may be created only after explicit bootstrap authorization and fresh discovery.
 - No se instaló OpenCode, AICCP ni infraestructura pesada durante este gate.
 
 **Evidencia:** [evidence/2026-10-06/RHEL-GATE-C-001/](./evidence/2026-10-06/RHEL-GATE-C-001/)
