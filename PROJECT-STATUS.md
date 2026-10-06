@@ -63,3 +63,35 @@ Do not infer RHEL state from Windows. Do not repartition or overwrite the SSD wi
 - Verificación: NetworkManager reiniciado y Wi-Fi operativo.
 - Evidencia: `evidence/2026-10-06/SOLUCIONATIA-001/`.
 - Alcance cerrado: únicamente recuperación Wi-Fi; trabajos posteriores quedan fuera de este caso.
+
+
+## RHEL-BASELINE-001 — Auditoría técnica inicial
+
+**Fecha:** 2026-10-06  
+**Estado:** EVIDENCED / DOCUMENTED
+
+Primera línea base técnica del RHEL físico actual, obtenida directamente mediante Desktop Commander Remote en modo de observación.
+
+- RHEL: 10.2 (Coughlan)
+- Kernel: 6.12.0-211.62.1.el10_2.x86_64
+- Target: multi-user.target
+- Unidades systemd fallidas: 0
+- SELinux: Enforcing
+- firewalld: activo, zona public
+- SSH: activo, TCP/22 escuchando
+- Wi-Fi: operativo
+- Node.js: 22.23.2 / npm 10.9.8
+- Python: 3.12.14
+- Desktop Commander: online en TTY2, versión 0.2.52
+- RAM disponible observada: ~6.1 GiB de 7.2 GiB
+- /: 5% usado; /home: 3% usado
+
+### Hallazgos pendientes
+
+- RTC configurado en hora local: evaluar antes de cambiarlo por coexistencia con Windows.
+- Medio de instalación montado: no desmontar ni modificar sin autorización.
+- DNF reporta repositorios de Subscription Management no actualizados: auditar registro/repositorios.
+- SSH expuesto en TCP/22: revisar política y exposición antes de habilitar acceso remoto móvil.
+- Desktop Commander sigue en modo interactivo TTY2; la persistencia como servicio queda pendiente de diseño y autorización.
+
+**Evidencia:** [evidence/2026-10-06/RHEL-BASELINE-001/](./evidence/2026-10-06/RHEL-BASELINE-001/)
