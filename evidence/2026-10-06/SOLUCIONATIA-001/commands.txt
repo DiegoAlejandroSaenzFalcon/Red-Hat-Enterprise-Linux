@@ -1,0 +1,46 @@
+# Commands — SOLUCIONATIA-001
+
+## Discovery / diagnosis
+
+lspci -k -s 00:14.3
+dmesg | grep iwlwifi | tail
+rpm -q wpa_supplicant NetworkManager-wifi
+dnf repolist
+getent hosts cdn.redhat.com
+ping -c 3 1.1.1.1
+ip -br addr
+nmcli device status
+
+## Temporary connectivity
+
+# USB tethering enabled on phone; NetworkManager then reported a connected wired/Ethernet path.
+
+## USB / offline contingency inspection
+
+lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS /dev/sda
+lsblk -f /dev/sda
+findmnt -S /dev/sda
+sudo mkdir -p /mnt/rhelusb
+sudo mount -o ro /dev/sda1 /mnt/rhelusb
+ls /mnt/rhelusb
+find /mnt/rhelusb -maxdepth 2 -type d \( -name BaseOS -o -name AppStream \)
+sudo umount /mnt/rhelusb
+sudo mkdir -p /mnt/rhelboot
+sudo mount -o ro /dev/sda2 /mnt/rhelboot
+ls /mnt/rhelboot
+sudo umount /mnt/rhelboot
+sudo mkdir -p /mnt/rheliso
+sudo mount -o ro /dev/sda /mnt/rheliso
+ls /mnt/rheliso
+ls -lh /mnt/rheliso/images
+sudo mkdir -p /mnt/installimg
+sudo mount -o loop,ro -t squashfs /mnt/rheliso/images/install.img /mnt/installimg
+ls -l /mnt/installimg/usr/sbin/wpa_supplicant
+find /mnt/installimg/usr/lib64/NetworkManager -name 'libnm-device-plugin-wifi.so' -print
+rpm -q NetworkManager
+
+## Applied recovery
+
+sudo dnf install -y wpa_supplicant NetworkManager-wifi
+sudo systemctl restart NetworkManager
+nmcli device status
