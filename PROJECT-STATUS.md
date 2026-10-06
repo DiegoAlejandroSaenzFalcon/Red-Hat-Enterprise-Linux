@@ -106,15 +106,31 @@ La Fase 1 confirmó que RHEL será el nodo operativo gobernado para ChatGPT, Des
 
 - RAM observada: ~7.2 GiB total / ~6.0 GiB disponible.
 - Swap: 7.6 GiB, sin uso.
-- Git: no instalado todavía.
+- Git: **2.52.0 instalado y verificado en /usr/bin/git.**
 - GitHub CLI: no detectado.
 - OpenCode/AICCP: no activos.
 - Desktop Commander: activo exclusivamente en TTY2; TTY1 permanece libre.
 - Node.js 22.23.2 y Python 3.12.14 disponibles.
+- Workspace creado en `/home/DevFS/workspaces/`.
+- Repositorio `Red-Hat-Enterprise-Linux` clonado localmente en el workspace.
 - No se instalarán componentes pesados hasta superar los gates de diseño y medición.
 
 Diseño: `docs/AICCP-ARCHITECTURE-v1.md`.
 
-### Próximo gate autorizado
+### Gate C — Bootstrap mínimo
 
-Bootstrap mínimo: instalar Git, preparar workspace y validar repositorios antes de instalar OpenCode o crear el runtime AICCP. La configuración de proveedor/modelo de OpenCode se descubrirá después de la instalación y sin introducir API keys.
+**Estado:** IMPLEMENTED / VERIFIED / EVIDENCED / DOCUMENTED
+
+- Git 2.52.0 instalado por el operador con privilegios administrativos.
+- Verificación remota: `git version 2.52.0`.
+- Binario verificado: `/usr/bin/git`.
+- No se configuraron credenciales Git globales.
+- `gh` aún no está instalado.
+- Workspace RHEL creado y repositorio canónico clonado.
+- No se instaló OpenCode, AICCP ni infraestructura pesada durante este gate.
+
+**Evidencia:** [evidence/2026-10-06/RHEL-GATE-C-001/](./evidence/2026-10-06/RHEL-GATE-C-001/)
+
+### Próximo gate
+
+Validar acceso Git/GitHub para los repositorios requeridos y mapear el workspace antes de instalar OpenCode. La configuración de proveedor/modelo de OpenCode se descubrirá después de la instalación y sin introducir API keys.
