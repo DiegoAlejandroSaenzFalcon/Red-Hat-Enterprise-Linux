@@ -19,6 +19,14 @@
 
 ---
 
+### Caso operativo real
+
+**SOLUCIONATIA-001 — Recuperación de Wi-Fi en RHEL 10.2**  
+Incidencia real documentada y verificada: diagnóstico de NetworkManager, recuperación mediante RPM oficiales con conectividad temporal y contraste del método offline mediante el ISO de RHEL 10.2.
+
+- [Guía Wi-Fi actualizada](./guia-wifi-rhel10/README.md)
+- [Evidencia reproducible del caso](./evidence/2026-10-06/SOLUCIONATIA-001/)
+
 ## Cómo usar este repositorio (metodología)
 
 1. Lee la visión general y la guía correspondiente.
