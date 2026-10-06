@@ -1,8 +1,7 @@
-﻿site_name: "Red Hat Enterprise Linux - Base de Conocimiento Didactica"
+site_name: "RHEL Enterprise Lab"
 site_url: "https://diegoalejandrosaenzfalcon.github.io/Red-Hat-Enterprise-Linux/"
-site_description: "Guias paso a paso para RHEL 10.2: WiFi, rendimiento, seguridad"
+site_description: "Professional RHEL enterprise laboratory: administration, security, automation, incidents, evidence and AI governance."
 site_author: "Diego Alejandro Saenz Falcon"
-copyright: "Copyright &copy; 2024 Diego Alejandro Saenz Falcon"
 
 repo_url: "https://github.com/DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux"
 repo_name: "DiegoAlejandroSaenzFalcon/Red-Hat-Enterprise-Linux"
@@ -39,15 +38,25 @@ markdown_extensions:
 
 nav:
   - Inicio: index.md
-  - Guias:
+  - Proyecto:
+    - Charter: PROJECT-CHARTER.md
+    - Arquitectura: ARCHITECTURE.md
+    - Gobernanza: GOVERNANCE.md
+    - Estado: PROJECT-STATUS.md
+  - Aprendizaje:
+    - Ruta profesional: LEARNING-PATH.md
+    - Matriz de laboratorio: LAB-MATRIX.md
+  - IA:
+    - Contrato IA: AI-CONTRACT.md
+    - Seguridad IA: AI-SECURITY-CONTRACT.md
+    - Operaciones IA: docs/ai/README.md
+  - Operaciones:
+    - Operaciones: docs/operations/README.md
+    - Evidencia: EVIDENCE-STANDARD.md
+  - Guías heredadas:
     - WiFi Offline: guia-wifi-rhel10/README.md
     - Rendimiento: guia-rendimiento/README.md
-    - Seguridad (CIS/STIG): guia-seguridad/README.md
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/DiegoAlejandroSaenzFalcon
+    - Seguridad CIS/STIG: guia-seguridad/README.md
 
 plugins:
   - search
