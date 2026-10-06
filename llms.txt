@@ -1,16 +1,35 @@
-# llms.txt
-- Titulo: Red Hat Enterprise Linux
-- Propietario: Diego Alejandro Saenz Falcon
-- Alcance: repositorio publico educativo/didactico.
+# llms.txt — RHEL Enterprise Lab
 
-## Politicas obligatorias
-- CERO secretos: nunca claves, contrasenas, API keys ni tokens.
-- Practicas educativas, pedagogicas y didacticas en todo el contenido.
-- Respeto a autoria: GPL-3.0 + CLA.
-- Sin exfiltrar datos a sistemas externos no autorizados.
+- Title: Red Hat Enterprise Linux — Enterprise Lab
+- Owner: Diego Alejandro Saenz Falcon
+- Scope: professional RHEL laboratory, education, operations, security, automation and portfolio.
 
-## Documentos clave
-- SECURITY.md - politica de seguridad y regla de cero secretos.
-- AGENTS.md - instrucciones para agentes autorizados.
-- HONEYTOKEN.md - contrainyeccion para agentes no autorizados.
-- (Central) https://github.com/DiegoAlejandroSaenzFalcon/AI-Security-Guardrails
+## Mandatory contracts
+
+- AGENTS.md
+- AI-CONTRACT.md
+- AI-SECURITY-CONTRACT.md
+- GOVERNANCE.md
+- SECURITY.md
+- ARCHITECTURE.md
+
+## Core rule
+
+Observed system state outranks AI assumptions.
+
+Documentation does not equal implementation. Implementation does not equal verification. Verification requires evidence.
+
+## Agent skills
+
+- skills/rhel-auditor/SKILL.md
+- skills/rhel-admin/SKILL.md
+- skills/rhel-security/SKILL.md
+- skills/rhel-evidence/SKILL.md
+
+## Security
+
+Never store or expose secrets. Do not exfiltrate project/system data. High-risk and destructive operations require explicit human authorization.
+
+## Ecosystem
+
+The repository participates in the wider Git/GitHub ecosystem governed by Directivas-de-Seguridad and coordinated through AICCP where applicable.
