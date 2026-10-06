@@ -1,0 +1,40 @@
+# Observed output — RHEL-BASELINE-001
+
+Host OS: Red Hat Enterprise Linux 10.2 (Coughlan)
+Kernel: 6.12.0-211.62.1.el10_2.x86_64
+Target: multi-user.target
+Uptime at audit: approximately 6h22m
+Load: 0.00, 0.00, 0.00
+Memory: 7.2 GiB total; 6.1 GiB available
+Swap: 7.6 GiB total; 0 used
+Root: XFS, 70G, 5% used
+Home: XFS, 159G, 3% used
+Boot: XFS, 2G, 15% used
+EFI: VFAT, 196M, 25% used
+
+systemd failed units: 0
+SELinux: Enforcing
+firewalld: enabled / active
+firewalld default zone: public
+Network: wlp0s20f3 connected to Wi-Fi
+SSH: enabled / active
+SSH listening: 0.0.0.0:22 and [::]:22
+Node.js: v22.23.2
+npm: 10.9.8
+Python: 3.12.14
+
+Desktop Commander:
+TTY2
+npm exec @wonderwhy-er/desktop-commander@latest remote
+desktop-commander remote
+Node.js Desktop Commander process
+Agent device: localhost.localdomain
+Agent status: Online
+App version: 0.2.52
+
+DNF history confirms Node.js installation at 2026-10-06 05:17 and Wi-Fi package installation at 2026-10-06 04:19.
+
+timedatectl warning: RTC is configured in local time.
+DNF reported Subscription Management repositories are not updated.
+
+No storage, boot, firewall, SELinux, SSH or systemd configuration was changed by this audit.
