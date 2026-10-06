@@ -1,0 +1,19 @@
+# RHEL-GATE-C-001 — Observed output
+
+git version 2.52.0
+/usr/bin/git
+
+Global credential/user/url configuration:
+(no matching configuration returned)
+
+Clone:
+Clonando en 'Red-Hat-Enterprise-Linux'...
+## main...origin/main
+
+GitHub CLI:
+gh: orden no encontrada
+
+Device:
+localhost.localdomain
+Desktop Commander:
+0.2.52
