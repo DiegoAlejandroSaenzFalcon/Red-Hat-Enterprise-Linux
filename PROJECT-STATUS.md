@@ -49,3 +49,17 @@ The output becomes Baseline 0.
 USB_PREPARATION → BOOT_VERIFICATION → INSTALLATION → BASELINE_0 → SECURITY_BASELINE → LAB_BUILD → VERIFICATION → PORTFOLIO
 
 Do not infer RHEL state from Windows. Do not repartition or overwrite the SSD without observed installer information and an explicit storage decision.
+
+
+## SOLUCIONATIA-001 — Wi-Fi RHEL 10.2
+
+**Fecha:** 2026-10-06  
+**Estado:** VERIFIED / EVIDENCED / DOCUMENTED
+
+- Incidencia: interfaz Intel `wlp0s20f3` sin gestión por NetworkManager.
+- Causa confirmada: ausencia de `wpa_supplicant` y `NetworkManager-wifi`.
+- Recuperación efectiva: paquetes oficiales mediante DNF usando USB tethering temporal.
+- Contingencia offline: RHEL USB + `images/install.img` inspeccionado y documentado.
+- Verificación: NetworkManager reiniciado y Wi-Fi operativo.
+- Evidencia: `evidence/2026-10-06/SOLUCIONATIA-001/`.
+- Alcance cerrado: únicamente recuperación Wi-Fi; trabajos posteriores quedan fuera de este caso.
